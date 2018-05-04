@@ -1,4 +1,4 @@
-package internal
+package main
 
 import (
 	"bytes"
@@ -45,7 +45,7 @@ func getSHA(repo, token, path string) string {
 	return sha.SHA
 }
 
-func Upload(repo, token, path string, content []byte) error {
+func upload(repo, token, path string, content []byte) error {
 	sha := getSHA(repo, token, path)
 	var data io.Reader
 	if sha == "" {

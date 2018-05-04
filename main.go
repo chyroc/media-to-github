@@ -7,8 +7,6 @@ import (
 	"strings"
 
 	"github.com/urfave/cli"
-
-	"github.com/Chyroc/media-to-github/internal"
 )
 
 var version = "v0.1.0"
@@ -69,7 +67,7 @@ func main() {
 			content = []byte(file)
 		}
 
-		return internal.Upload(repo, token, path, content)
+		return upload(repo, token, path, content)
 	}
 
 	err := app.Run(os.Args)
