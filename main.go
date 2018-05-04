@@ -51,6 +51,7 @@ func main() {
 		}
 
 		var content []byte
+		var err error
 
 		if strings.HasPrefix(file, "http") {
 			resp, err := http.Get(file)
@@ -64,7 +65,10 @@ func main() {
 				return err
 			}
 		} else {
-			content = []byte(file)
+			content, err = ioutil.ReadFile(file)
+			if err != nil {
+				return err
+			}
 		}
 
 		return upload(repo, token, path, content)
