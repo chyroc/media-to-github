@@ -3,12 +3,12 @@ package internal
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"encoding/json"
-	"io"
 )
 
 func getSHA(repo, token, path string) string {

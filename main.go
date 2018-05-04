@@ -1,13 +1,14 @@
 package main
 
 import (
+	"io/ioutil"
+	"net/http"
 	"os"
+	"strings"
 
 	"github.com/urfave/cli"
+
 	"github.com/Chyroc/media-to-github/internal"
-	"strings"
-	"net/http"
-	"io/ioutil"
 )
 
 var version = "v0.1.0"
