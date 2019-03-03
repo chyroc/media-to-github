@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
 
+	"github.com/satori/go.uuid"
 	"github.com/urfave/cli"
 )
 
@@ -46,8 +48,11 @@ func main() {
 	}
 
 	app.Action = func(c *cli.Context) error {
-		if token == "" || repo == "" || file == "" || path == "" {
+		if token == "" || repo == "" || file == "" {
 			return cli.ShowAppHelp(c)
+		}
+		if path == "" {
+			path = fmt.Sprintf("img/%s.png", uuid.NewV4().String())
 		}
 
 		var content []byte
