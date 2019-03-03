@@ -48,11 +48,18 @@ func main() {
 	}
 
 	app.Action = func(c *cli.Context) error {
-		if token == "" || repo == "" || file == "" {
+		if token == "" || repo == "" {
 			return cli.ShowAppHelp(c)
 		}
 		if path == "" {
 			path = fmt.Sprintf("img/%s.png", uuid.NewV4().String())
+		}
+		if file == "" {
+			var err error
+			file, err = readImageByParse()
+			if err != nil {
+				return err
+			}
 		}
 
 		var content []byte
