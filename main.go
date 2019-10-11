@@ -104,8 +104,8 @@ func main() {
 				fmt.Printf("built done.\n")
 				return nil
 			}
-			fmt.Printf("build %s, wait 1s.\n", status)
-			time.Sleep(time.Second)
+			fmt.Printf("build %s, wait 2s.\n", status)
+			time.Sleep(time.Second * 2)
 		}
 	}
 
