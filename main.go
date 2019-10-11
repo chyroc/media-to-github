@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/satori/go.uuid"
 	"github.com/urfave/cli"
@@ -83,7 +84,29 @@ func main() {
 			}
 		}
 
-		return upload(repo, token, path, content)
+		if err = upload(repo, token, path, content); err != nil {
+			return err
+		}
+
+		pageURL, err := getRepoPageURLInfo(repo, token)
+		if err != nil {
+			return nil
+		}
+
+		fmt.Printf("url: %s%s\n", pageURL, path)
+
+		for {
+			status, err := getRepoPageBuildStatus(repo, token)
+			if err != nil {
+				return err
+			}
+			if status == "built" {
+				fmt.Printf("built done.\n")
+				return nil
+			}
+			fmt.Printf("build %s, wait 1s.\n", status)
+			time.Sleep(time.Second)
+		}
 	}
 
 	err := app.Run(os.Args)

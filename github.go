@@ -84,3 +84,59 @@ func upload(repo, token, path string, content []byte) error {
 
 	return nil
 }
+
+func factoryDoGithub(method, url, token string) ([]byte, error) {
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Authorization", "token "+token)
+
+	client := &http.Client{Timeout: time.Second * 10}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	bs, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode >= 300 {
+		return nil, fmt.Errorf("call github err, url=%s, code=%d, res=%s", url, resp.StatusCode, bs)
+	}
+
+	return bs, nil
+}
+
+func getRepoPageURLInfo(repo, token string) (string, error) {
+	url := fmt.Sprintf("https://api.github.com/repos/%s/pages", repo)
+	bs, err := factoryDoGithub(http.MethodGet, url, token)
+	if err != nil {
+		return "", err
+	}
+
+	var res = make(map[string]interface{})
+	if err = json.Unmarshal(bs, &res); err != nil {
+		return "", err
+	}
+
+	return res["html_url"].(string), nil
+}
+
+func getRepoPageBuildStatus(repo, token string) (string, error) {
+	url := fmt.Sprintf("https://api.github.com/repos/%s/pages/builds/latest", repo)
+	bs, err := factoryDoGithub(http.MethodGet, url, token)
+	if err != nil {
+		return "", err
+	}
+
+	var res = make(map[string]interface{})
+	if err = json.Unmarshal(bs, &res); err != nil {
+		return "", err
+	}
+
+	return res["status"].(string), nil
+}
