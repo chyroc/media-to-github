@@ -1,6 +1,6 @@
 module github.com/chyroc/media-to-github
 
-go 1.12
+go 1.16
 
 require (
 	github.com/satori/go.uuid v1.2.0
