@@ -118,7 +118,7 @@ func getRepoPageURLInfo(repo, token string) (string, error) {
 		return "", err
 	}
 
-	var res = make(map[string]interface{})
+	res := make(map[string]interface{})
 	if err = json.Unmarshal(bs, &res); err != nil {
 		return "", err
 	}
@@ -133,7 +133,7 @@ func getRepoPageBuildStatus(repo, token string) (string, error) {
 		return "", err
 	}
 
-	var res = make(map[string]interface{})
+	res := make(map[string]interface{})
 	if err = json.Unmarshal(bs, &res); err != nil {
 		return "", err
 	}

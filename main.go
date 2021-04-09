@@ -53,7 +53,7 @@ func main() {
 			return cli.ShowAppHelp(c)
 		}
 		if path == "" {
-			path = fmt.Sprintf("img/%s.png", uuid.NewV4().String())
+			path = fmt.Sprintf("data/%s.png", uuid.NewV4().String())
 		}
 		if file == "" {
 			var err error
