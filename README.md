@@ -2,12 +2,22 @@
 
 上传小文件资源到 github，并利用 github pages 功能生成 url 。
 
-## 安装
-```
-go get -u github.com/chyroc/media-to-github
+## Install
+
+### By Go Get
+
+```shell
+go get github.com/chyroc/chyroc/media-to-github
 ```
 
-## 使用
+### By Brew
+
+```shell
+brew tap chyroc/tap
+brew install chyroc/tap/chyroc/media-to-github
+```
+
+## Usage
 
 ```text
 NAME:
