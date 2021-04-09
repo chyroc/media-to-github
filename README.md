@@ -33,10 +33,15 @@ GLOBAL OPTIONS:
 
 ```text
 // 从链接上传
-media-to-github -t <github token> -r chyroc/media -f https://media.chyroc.cn/img/csrf.jpg -p data/test2.jpg
+media-to-github -t <github token> -r owner/repo -f https://host/csrf.jpg
 
 // 从本地文件上传
-media-to-github -t <github token> -r chyroc/media -f ./README.md -p data/test3.md
+media-to-github -t <github token> -r owner/repo -f ./README.md
+
+// 先复制图片，然后从剪贴板粘贴
+media-to-github -t <github token> -r owner/repo
 ```
 
-`-p` 可以省略，将随机生成文件名（ `png` 后缀）
+- `-t` 可以省略，默认读取环境变量：GITHUB_TOKEN
+- `-p` 可以省略，默认生成随机文件名（ `png` 后缀）
+- `-f` 可以省略，默认从剪切板读图片
