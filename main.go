@@ -28,7 +28,7 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "t, token",
-			Usage:       "github token",
+			Usage:       "github token(default: read from env GITHUB_TOKEN)",
 			Destination: &token,
 		},
 		cli.StringFlag{
@@ -38,17 +38,20 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:        "f, file",
-			Usage:       "file path or url",
+			Usage:       "file path or url(default: data/<uuid>.png)",
 			Destination: &file,
 		},
 		cli.StringFlag{
 			Name:        "p, path",
-			Usage:       "where file store",
+			Usage:       "where file store(default: png file from parse)",
 			Destination: &path,
 		},
 	}
 
 	app.Action = func(c *cli.Context) error {
+		if token == "" {
+			token = os.Getenv("GITHUB_TOKEN")
+		}
 		if token == "" || repo == "" {
 			return cli.ShowAppHelp(c)
 		}
