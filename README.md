@@ -11,7 +11,7 @@ go get -u github.com/chyroc/media-to-github
 
 ```text
 NAME:
-   media-to-github - 上传图片到github
+   media-to-github - 上传图片到 GitHub
 
 USAGE:
    media-to-github [global options] command [command options] [arguments...]
@@ -23,10 +23,10 @@ COMMANDS:
      help, h  Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   -t value, --token value  github token
+   -t value, --token value  github token(default: read from env GITHUB_TOKEN)
    -r value, --repo value   github repo
-   -f value, --file value   file path or url
-   -p value, --path value   where file store
+   -f value, --file value   file path or url(default: data/<uuid>.png)
+   -p value, --path value   where file store(default: png file from parse)
    --help, -h               show help
    --version, -v            print the version
 ```

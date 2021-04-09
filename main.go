@@ -24,7 +24,7 @@ func main() {
 	app.Name = "media-to-github"
 	app.Version = version
 	app.HelpName = "media-to-github"
-	app.Usage = "上传图片到github"
+	app.Usage = "上传图片到 GitHub"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "t, token",
